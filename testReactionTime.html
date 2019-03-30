@@ -1,0 +1,62 @@
+<HTML>
+    <Head>
+        <title>Reaction Time Tester</title>
+        <style type="text/css">
+        #shape{
+            width: 200px;
+            height: 200px;
+            background-color:red;
+            display:none;
+            position:relative;
+
+        }
+        body{
+            font-family: sans-serif;
+        }
+        </style>
+    </Head>
+    <Body>
+        <h1>Test Your Reaction Time!!</h1>
+        <p>Click on shapes as fast as possible!!</p>
+        <p><b>Your Time:</b><span id="timeTaken"></span></p>
+        <div id="shape"></div>
+        <script type="text/javascript">
+        delayForShape();
+        function getRandomColor() {
+             var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+        var start=new Date().getTime();
+        function makeShapeAppear(){
+            var z=(Math.random()*200)+100;
+            if(Math.random()>0.5){
+                document.getElementById("shape").style.borderRadius="50%";
+            }
+            else{
+                document.getElementById("shape").style.borderRadius="0";
+            }
+            document.getElementById("shape").style.height=z+'px';
+            document.getElementById("shape").style.width=z+'px';
+            document.getElementById("shape").style.top=Math.random()*400+'px';
+            document.getElementById("shape").style.left=Math.random()*400+'px';
+            document.getElementById("shape").style.display="block";
+            document.getElementById("shape").style.backgroundColor=getRandomColor();
+            start=new Date().getTime();
+        }
+        function delayForShape(){
+            setTimeout(makeShapeAppear,Math.random()*2000);
+        }  
+            document.getElementById("shape").onclick=function(){
+                document.getElementById("shape").style.display="none";
+                var end=new Date().getTime();
+                var timeTaken=(end-start)/1000;
+               document.getElementById("timeTaken").innerHTML=timeTaken+'s';
+               delayForShape();
+            }
+        </script>
+    </Body>
+</HTML>
